@@ -12,6 +12,7 @@
     "test": "npx jest --config=jest.config.json"
   },
   "dependencies": {
+    "@babel/runtime": "^7.4.3",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "styled-components": "4.2.0",
@@ -21,6 +22,7 @@
     "@babel/plugin-external-helpers": "7.2.0",
     "@babel/plugin-proposal-class-properties": "7.4.0",
     "@babel/plugin-proposal-object-rest-spread": "7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "7.4.3",
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.3.3",

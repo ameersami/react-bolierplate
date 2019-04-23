@@ -26,7 +26,7 @@ module.exports = (env, { mode = 'development' }) => {
                 '@babel/preset-typescript',
               ],
               plugins: [
-                '@babel/plugin-external-helpers',
+                '@babel/plugin-transform-runtime',
                 'babel-plugin-styled-components',
                 '@babel/plugin-proposal-class-properties',
                 '@babel/plugin-proposal-object-rest-spread',
