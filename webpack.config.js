@@ -37,10 +37,10 @@ module.exports = (env, { mode = 'development' }) => {
       ],
     },
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'lib/dist'),
       filename: 'index.js',
       libraryTarget: 'umd',
-      publicPath: '/dist/',
+      publicPath: '/lib/dist/',
       umdNamedDefine: true,
     },
     optimization: {
@@ -75,13 +75,13 @@ module.exports = (env, { mode = 'development' }) => {
         'process.env.NODE_ENV': '"development"',
       }),
       new HtmlWebpackPlugin({
-        filename: path.resolve(__dirname, 'dist/index.html'),
+        filename: path.resolve(__dirname, 'lib/dist/index.html'),
         template: path.resolve(__dirname, 'src', 'index.html'),
       }),
       new webpack.HotModuleReplacementPlugin(),
     ];
     config.devServer = {
-      contentBase: path.resolve(__dirname, 'dist'),
+      contentBase: path.resolve(__dirname, 'lib/dist'),
       publicPath: '/',
       stats: {
         colors: true,

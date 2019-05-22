@@ -4,7 +4,7 @@
     "jsx": "react",
     "module": "amd",
     "noImplicitAny": true,
-    "outDir": "./dist/",
+    "outDir": "./lib/dist/",
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": true,
