@@ -17,9 +17,9 @@ services:
     labels:	
       - "traefik.docker.network=web"	
       - "traefik.enable=true"	
-      - "traefik.ded.frontend.rule=Host:reactApp.yourdomain.com"
-      - "traefik.ded.frontend.port=8080"
-      - "traefik.ded.frontend.protocol=http"
+      - "traefik.reactboilerplate.frontend.rule=Host:reactApp.yourdomain.com"
+      - "traefik.reactboilerplate.frontend.port=8080"
+      - "traefik.reactboilerplate.frontend.protocol=http"
 
 networks:
   web:
