@@ -50,7 +50,7 @@ pipeline {
               def repoURL = """
                 https://localhost/api/endpoints/1/docker/build?t=reactApp:latest&remote=https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/$GITHUB_USERNAME/react-bolierplate.git&dockerfile=Dockerfile&nocache=true
               """
-              def imageResponse = httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"], [name: 'Host', value: "portainer.localhost"]]
+              def imageResponse = httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"], name: 'Host', value: "portainer.localhost"]]
           }
         }
       }
@@ -62,7 +62,7 @@ pipeline {
           // Get all stacks
           String existingStackId = ""
           if("true") {
-            def stackResponse = httpRequest httpMode: 'GET', ignoreSslErrors: true, url: "https://localhost/api/stacks", validResponseCodes: '200', consoleLogResponseBody: true, customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"], [name: 'Host', value: "portainer.localhost"]]
+            def stackResponse = httpRequest httpMode: 'GET', ignoreSslErrors: true, url: "https://localhost/api/stacks", validResponseCodes: '200', consoleLogResponseBody: true, customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"], name: 'Host', value: "portainer.localhost"]]
             def stacks = new groovy.json.JsonSlurper().parseText(stackResponse.getContent())
             
             stacks.each { stack ->
@@ -77,7 +77,7 @@ pipeline {
             def stackURL = """
               https://localhost/api/stacks/$existingStackId
             """
-            httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '204', httpMode: 'DELETE', ignoreSslErrors: true, url: stackURL, customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"], [name: 'Host', value: "portainer.localhost"]]
+            httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '204', httpMode: 'DELETE', ignoreSslErrors: true, url: stackURL, customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"], name: 'Host', value: "portainer.localhost"]]
 
           }
 
@@ -93,7 +93,7 @@ pipeline {
           // Stack does not exist
           // Generate JSON for when the stack is created
           withCredentials([usernamePassword(credentialsId: 'Github', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
-            def swarmResponse = httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'GET', ignoreSslErrors: true, consoleLogResponseBody: true, url: "https://localhost/api/endpoints/1/docker/swarm", customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"] [name: 'Host', value: "portainer.localhost"]]
+            def swarmResponse = httpRequest acceptType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'GET', ignoreSslErrors: true, consoleLogResponseBody: true, url: "https://localhost/api/endpoints/1/docker/swarm", customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"] name: 'Host', value: "portainer.localhost"]]
             def swarmInfo = new groovy.json.JsonSlurper().parseText(swarmResponse.getContent())
 
             createStackJson = """
@@ -103,7 +103,7 @@ pipeline {
           }
 
           if(createStackJson?.trim()) {
-            httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: createStackJson, url: "https://localhost/api/stacks?method=repository&type=1&endpointId=1", customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"], [name: 'Host', value: "portainer.localhost"]]
+            httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', validResponseCodes: '200', httpMode: 'POST', ignoreSslErrors: true, consoleLogResponseBody: true, requestBody: createStackJson, url: "https://localhost/api/stacks?method=repository&type=1&endpointId=1", customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"], name: 'Host', value: "portainer.localhost"]]
           }
 
         }
